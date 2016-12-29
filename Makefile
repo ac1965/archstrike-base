@@ -18,14 +18,16 @@ check_exists:
 
 # Run image
 run: check_exists
-	docker run --rm -it \
+	docker run -dti -p 6080:6080 \
 		--name $(NAME)-$(shell date +%Y%m%d) \
 		$(NAME):$(VERSION)
 
 # Used for quality diagnostics
 # Opens bash session
 run_bash: check_exists
-	docker run --rm -it --entrypoint=/bin/bash $(NAME):$(VERSION)
+	docker run -dti -p 6080:6080 \
+		--name $(NAME)-$(shell date +%Y%m%d) \
+		$(NAME):$(VERSION)
 
 # Remove Docker image
 clean:
